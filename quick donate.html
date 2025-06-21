@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Reduction Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2E7D32;
+            --accent-color: #FF9800;
+            --light-bg: #f8f9fa;
+            --dark-text: #212121;
+            --light-text: #ffffff;
+        }
+        
+
+        body {
+            background: white;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .gradient-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            margin: 0 auto;
+            padding: 10px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            flex-shrink: 0;
+        }
+
+        .title {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 600;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 300;
+            color: black;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            background: linear-gradient(180deg, #a9e783 0%, #aef6b4 100%);
+            border-radius: 20px;
+            border: 3px solid white;
+            padding: 20px;
+            margin: 10px auto;
+            width: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .form-title {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .section-title {
+            font-size: clamp(1rem, 2vw, 1.8rem);
+            font-weight: 600;
+            text-align: center;
+            margin: 15px 0;
+            color: black;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+            font-weight: 300;
+            margin-bottom: 8px;
+            text-align: center;
+            color: black;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 3px solid white;
+            background: rgba(255, 255, 255, 0.7);
+            font-size: clamp(0.8rem, 1vw, 1rem);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .upload-container {
+            border-radius: 15px;
+            border: 1px solid black;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .upload-btn {
+            background: #D9D9D9;
+            border-radius: 8px;
+            padding: 10px 20px;
+            display: inline-block;
+            font-size: clamp(0.8rem, 1vw, 1rem);
+            cursor: pointer;
+        }
+
+        .file-info {
+            display: inline-block;
+            margin-left: 15px;
+            font-size: clamp(0.8rem, 1vw, 1rem);
+        }
+
+        .add-item {
+            text-align: right;
+            font-size: clamp(0.8rem, 1vw, 1.2rem);
+            font-weight: 300;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            display: block;
+            background: #43BC21;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+            font-weight: 400;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+
+         
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1rem 0;
+            text-align: center;
+        }
+        
+        nav {
+            background-color: var(--secondary-color);
+            padding: 0.5rem 2rem;
+        }
+        
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 15px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header, .form-title, .section-title {
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .form-input, .upload-btn, .submit-btn {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>FreshRescue</h1>
+        <p>Reducing Food Waste, One Connection at a Time</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Join Us</a></li>
+            <li><a href="#">Impact</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <div class="gradient-bg"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title">JOIN OUR FOOD REDUCTION COMMUNITY</h1>
+            <p class="subtitle">Help reduce food waste and make a difference.</p>
+        </header>
+        
+        <div class="form-container">
+            <h2 class="form-title">QUICK DONATION FORM</h2>
+            
+            <h3 class="section-title">Personal Information</h3>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" id="firstName" class="form-input">
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" id="lastName" class="form-input">
+                </div>
+            </div>
+            
+            <div class="form-group full-width">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" id="email" class="form-input">
+            </div>
+            
+            <div class="form-group full-width">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" id="phone" class="form-input">
+            </div>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="itemCount" class="form-label">No of Item</label>
+                    <input type="number" id="itemCount" class="form-input">
+                </div>
+                
+                <div class="form-group">
+                    <label for="itemName" class="form-label">Item Name</label>
+                    <input type="text" id="itemName" class="form-input">
+                </div>
+            </div>
+            
+            <div class="upload-container">
+                <label class="form-label">Upload Photo</label>
+                <div class="upload-btn">Choose File</div>
+                <span class="file-info">No file chosen</span>
+            </div>
+            
+            <div class="add-item">add item +</div>
+            
+            <div class="form-group full-width">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" id="description" class="form-input">
+            </div>
+            
+            <div class="form-group full-width">
+                <label for="address" class="form-label">Address</label>
+                <textarea id="address" class="form-input" style="height: 80px;"></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Application</button>
+        </div>
+    </div>
+</body>
+</html>
